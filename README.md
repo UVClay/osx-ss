@@ -11,7 +11,6 @@ OS X Screenshot Utility is a simple Python daemon leveraging fswatch and termina
     Leave your terminal window open
 
 ## To Do:
-* Subprocess loop for fswatch in the program
 * launchctl daemon script
 * Installer
 * Finish arguments/interactive logic
