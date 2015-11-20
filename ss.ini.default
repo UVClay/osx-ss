@@ -1,6 +1,7 @@
 [main]
 Server = clay.coffee
 ScreenDir = /Users/clay/Screenshots
+PID = /tmp/osx-ss.pid
 
 [clay.coffee]
 FTPHost = ftp.clay.coffee
