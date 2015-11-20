@@ -1,0 +1,10 @@
+[main]
+Server = clay.coffee
+ScreenDir = /Users/clay/Screenshots
+
+[clay.coffee]
+FTPHost = ftp.clay.coffee
+FTPUser = example
+FTPPass = changeme
+FTPWDir =
+WebRoot = http://i.clay.coffee
