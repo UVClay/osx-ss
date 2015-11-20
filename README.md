@@ -8,7 +8,7 @@ OS X Screenshot Utility is a simple Python daemon leveraging fswatch and termina
     chmod +x manage.py
     <Update ss.ini properly, automated solution soon>
     python3 manage.py
-    Leave your terminal window open
+    Leave your terminal window open (or python3 manage.py &)
 
 ## To Do:
 * launchctl daemon script
