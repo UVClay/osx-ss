@@ -36,10 +36,8 @@ def main():
 
 def upload(line):
     new = gen() + '.png'
-    print("made it to the upload function")
     ftp = FTP(config[_server]['FTPHost'], config[_server]['FTPUser'], config[_server]['FTPPass'])
     img = open(line, "rb")
-    print("made it to the img open statement")
     ftp.storbinary('STOR ' + new, img)
     url = config[_server]['WebRoot'] + new
     img.close()
