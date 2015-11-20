@@ -4,14 +4,10 @@ OS X Screenshot Utility is a simple Python daemon leveraging fswatch and termina
 ## Installation and usage:
 *current version:*
 
-    mkdir ~/Screenshots
-    mkdir ~/Screenshots/Temp
-    defaults write com.apple.screencapture location ~/Screenshots/Temp
-    killall SystemUIServer
     git clone https://github.com/UVClay/osx-ss
-    chmod +x loop.sh manage.py
+    chmod +x manage.py
     <Update ss.ini properly, automated solution soon>
-    ./loop.sh
+    python3 manage.py
     Leave your terminal window open
 
 ## To Do:
