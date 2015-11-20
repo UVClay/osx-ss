@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 # OS X Screenshot Automation
 # github.com/uvclay/osx-ss
-# Alpha whatever it works so who cares
+# Revision 0.1.0 (first stable but mostly useless)
 # Requires (homebrew): fswatch, terminal-notifier
 # Requires (pip3): daemonize
 
@@ -58,11 +58,12 @@ def exttest(line):
 
 
 def execute(command):
+    # http://stackoverflow.com/a/4417735
     popen = subprocess.Popen(command, stdout=subprocess.PIPE)
     lines_iterator = iter(popen.stdout.readline, b"")
     for line in lines_iterator:
         line = line[:-1]
-        exttest(line)  # yield line
+        exttest(line)
 
 
 if __name__ == "__main__":
