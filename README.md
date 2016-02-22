@@ -20,16 +20,13 @@ OS X Screenshot Utility is a simple Python daemon leveraging fswatch and termina
 * Support for non-FTP file transfer (sftp, POST, rsync)
 
 ## Wishlist:
-* Test with [watchdog][watchdog] to see if its worth using
 * /!\ GUI /!\
 * Notification area icons
-* POSIX-compliance with support for alternate notification systems (fswatch already supports inotify and kqueue)
 * Windows support
 
 ## Thanks to:
-* [fswatch][fswatch]
+* [watchdog][watchdog]
 * [terminal-notifier][terminal-notifier]
 
-[fswatch]: https://github.com/emcrisostomo/fswatch
 [terminal-notifier]: https://github.com/julienXX/terminal-notifier
 [watchdog]: https://github.com/gorakhargosh/watchdog
