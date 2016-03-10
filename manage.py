@@ -18,11 +18,9 @@ import time
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-
 config = configparser.ConfigParser()
 config.read('ss.ini')
 _server = config['main']['Server']
-
 
 # TODO: Finish arguments
 """
@@ -137,6 +135,7 @@ def pupload_upload(filename):
 
 
 def pupload_upload(filename):
+    # TODO: Make this less horrible.  Its really gross.
     url = config[_server]['PupFile']
     conckey = config[_server]['PupKey1'] + "=" + config[_server]['PupKey2']
     concfile = "file[]=@" + os.path.abspath(filename)
@@ -151,8 +150,6 @@ def pupload_upload(filename):
             notify(stream)
             c.kill()
             return
-
-
 
 
 def gen(size=5, chars=string.ascii_letters + string.digits):
