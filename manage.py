@@ -5,6 +5,7 @@
 # Requires (homebrew): terminal-notifier
 # Requires (linux): xclip
 # Requires (pip3): pyperclip, watchdog
+# Optional (pip3): pycurl
 
 import configparser
 import os
@@ -16,7 +17,6 @@ import subprocess
 import time
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
-from ftplib import FTP
 
 
 config = configparser.ConfigParser()
@@ -45,7 +45,7 @@ class Monitor(FileSystemEventHandler):
 
     def on_created(self, event):
         if not event.is_directory and event.src_path.endswith(self.filename):
-            exttest(event.src_path)
+            handler(event.src_path)
             self.observer.stop
 
 
@@ -54,9 +54,15 @@ def depcheck():
         if which('terminal-notifier') is None:
             print("Please install terminal-notifier")
             exit()
+        if which('curl') is None:
+            print("curl isn't installed.  However you managed that.  Install it.")
+            exit()
     elif platform.system() == 'Linux':
         if which('xclip') is None:
             print("Please install xclip")
+            exit()
+        if which('curl') is None:
+            print("Please install curl")
             exit()
     elif platform.system() == 'Windows':
         return 0
@@ -64,7 +70,7 @@ def depcheck():
 
 
 def main():
-    path = config['main']['ScreenDir']
+    path = config['main']['WDir']
     filename = ''
 
     observer = Observer()
@@ -82,8 +88,21 @@ def main():
     return 0
 
 
-def upload(filename):
-    new = gen() + '.png'
+def handler(filename):
+    if config['main']['Handler'] == 'pupload':
+        pupload_upload(filename)
+    elif config['main']['Handler'] == 'ftp':
+        ftp_upload(filename)
+    elif config['main']['Handler'] == 'debug':
+        debug(filename)
+    else:
+        return
+
+
+def ftp_upload(filename):
+    from ftplib import FTP
+    ext = os.path.splitext(os.path.abspath(filename))[-1]
+    new = gen() + ext
     ftp = FTP(config[_server]['FTPHost'], config[_server]['FTPUser'], config[_server]['FTPPass'])
     img = open(filename, "rb")
     ftp.storbinary('STOR ' + new, img)
@@ -92,6 +111,48 @@ def upload(filename):
     notify(url)
     print(url)
     ftp.quit()
+
+
+'''
+def pupload_upload(filename):
+    import pycurl
+    from urllib.parse import urlencode
+    file = config[_server]['PupFile']
+    key1 = config[_server]['PupKey1']
+    key2 = config[_server]['PupKey2']
+
+    c = pycurl.Curl()
+    c.setopt(c.URL, file)
+
+    c.setopt(c.POSTFIELDS, urlencode({key1: key2}))
+    c.setopt(c.HTTPPOST, [
+    ('file[]', (
+        c.FORM_FILE, __file__,
+    )),
+])
+
+    c.perform()
+    c.close()
+'''
+
+
+def pupload_upload(filename):
+    url = config[_server]['PupFile']
+    conckey = config[_server]['PupKey1'] + "=" + config[_server]['PupKey2']
+    concfile = "file[]=@" + os.path.abspath(filename)
+    c = subprocess.Popen(
+        ["curl", "-s", "-F", conckey, "-F", concfile, url], stdout=subprocess.PIPE
+    )
+    for line in iter(c.stdout.readline, ''):
+        stream = line.decode()
+        if stream == '':
+            pass
+        else:
+            notify(stream)
+            c.kill()
+            return
+
+
 
 
 def gen(size=5, chars=string.ascii_letters + string.digits):
@@ -110,11 +171,6 @@ def notify(url):
     elif platform.system() == 'Windows':
         print("whee")
     pyperclip.copy(url)
-
-
-def exttest(filename):
-    if filename.lower().endswith('.png'):
-        upload(filename)
 
 
 def which(program):

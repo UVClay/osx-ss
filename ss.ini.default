@@ -1,11 +1,28 @@
 [main]
-Server = clay.coffee
-ScreenDir = /Users/clay/Screenshots
-PID = /tmp/osx-ss.pid
+#Handler: How to handle uploads.  (options: ftp, puploader)
+Handler = puploader
 
-[clay.coffee]
+#Server: Name of the config block where the server info is defined
+Server = pup.clay.coffee
+
+#WDir: Working directory to be monitored
+WDir = /Users/clay/Uploads
+
+#PID: PID file location (Disabled for now)
+#PID = /tmp/osx-ss.pid
+
+#Example FTP block
+[ftp.clay.coffee]
 FTPHost = ftp.clay.coffee
 FTPUser = example
 FTPPass = changeme
 FTPWDir =
+WebRoot = http://i.clay.coffee
+
+#Example puploader block (See puploader script for more info)
+[pup.clay.coffee]
+PupHost = clay.coffee
+PupKey1 = key1value
+PupKey2 = key2value
+PupFile = http://i.clay.coffee/puploader.php
 WebRoot = http://i.clay.coffee
