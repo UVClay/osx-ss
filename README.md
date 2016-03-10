@@ -1,5 +1,5 @@
 ## OS X Screenshot Utility (osx-ss)
-OS X Screenshot Utility is a simple Python daemon leveraging fswatch and terminal-notifier to monitor your Screenshots folder and upload any new screenshots to an FTP host, or [puploader][sides] host.  Designed to help fill the gap left by ShareX on my Mac machines.
+OS X Screenshot Utility is a simple Python daemon leveraging fswatch and terminal-notifier to monitor your Screenshots folder and upload any new screenshots to an FTP host, or [puploader][puploader] host.  Designed to help fill the gap left by ShareX on my Mac machines.
 
 ## Installation and usage:
 *current version:* 0.2.0
@@ -31,4 +31,5 @@ OS X Screenshot Utility is a simple Python daemon leveraging fswatch and termina
 
 [terminal-notifier]: https://github.com/julienXX/terminal-notifier
 [watchdog]: https://github.com/gorakhargosh/watchdog
-[sides]: https://git.sides.tv/puploader/tree/puploader.php
+[sides]: https://github.com/sides
+[puploader]: https://git.sides.tv/puploader/tree/puploader.php
