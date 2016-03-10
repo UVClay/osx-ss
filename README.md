@@ -34,4 +34,4 @@ OS X Screenshot Utility is a simple Python daemon leveraging watchdog to monitor
 [terminal-notifier]: https://github.com/julienXX/terminal-notifier
 [watchdog]: https://github.com/gorakhargosh/watchdog
 [sides]: https://github.com/sides
-[puploader]: https://git.sides.tv/puploader/tree/puploader.php
+[puploader]: https://github.com/sides/puploader
