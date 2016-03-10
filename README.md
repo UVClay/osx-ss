@@ -2,7 +2,7 @@
 OS X Screenshot Utility is a simple Python daemon leveraging watchdog to monitor your screenshots folder and upload any new screenshots to an FTP host, or [puploader][puploader] host.  Designed to help fill the gap left by ShareX on my Mac machines.
 
 ## Installation and usage:
-*current version:* 0.2.0
+*current version:* 0.3.0
 
     git clone https://github.com/UVClay/osx-ss
     chmod +x manage.py

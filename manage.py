@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 # OS X Screenshot Automation
 # github.com/uvclay/osx-ss
-# Revision 0.2.0
+# Revision 0.3.0
 # Requires (homebrew): terminal-notifier
 # Requires (linux): xclip
 # Requires (pip3): pyperclip, watchdog
