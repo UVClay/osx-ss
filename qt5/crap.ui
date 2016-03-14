@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>607</width>
+    <height>438</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>OSX-SS [0.5 - UI Test 0.1]</string>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>Open Folder</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Server:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Replace Me 1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Replace Me 2</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Uploader:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4" rowspan="7">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>324</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="5" rowspan="7">
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="maximumSize">
+       <size>
+        <width>473</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+       <bool>true</bool>
+      </attribute>
+      <row>
+       <property name="text">
+        <string>test</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>test 2</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>test 3</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Link</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>File location</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>1</string>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>http://i.clay.coffee/test</string>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>/users/clay/Documents/test</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>2</string>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string>http://i.clay.coffee/test2</string>
+       </property>
+      </item>
+      <item row="1" column="2">
+       <property name="text">
+        <string>/users/clay/Documents/test2</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>3</string>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string>http://i.clay.coffee/test3</string>
+       </property>
+      </item>
+      <item row="2" column="2">
+       <property name="text">
+        <string>/users/clay/Documents/test3</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>607</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuTest">
+    <property name="title">
+     <string>Test</string>
+    </property>
+    <addaction name="actionSomething"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuTest_2">
+    <property name="title">
+     <string>&amp;Gay</string>
+    </property>
+    <addaction name="actionNerd"/>
+   </widget>
+   <widget class="QMenu" name="menuTest_3_wewew">
+    <property name="title">
+     <string>Test &amp;3 wewew</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuTest"/>
+   <addaction name="menuTest_2"/>
+   <addaction name="menuTest_3_wewew"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionSomething">
+   <property name="text">
+    <string>Something</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionNerd">
+   <property name="text">
+    <string>Nerd</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>10</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

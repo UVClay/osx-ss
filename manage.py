@@ -1,9 +1,8 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 # OS X Screenshot Automation
 # github.com/uvclay/osx-ss
-# Revision 0.3.0
 # Requires (homebrew): terminal-notifier
-# Requires (linux): xclip
+# Requires (arch): xclip, python-pyqt5
 # Requires (pip3): pyperclip, watchdog
 # Optional (pip3): pycurl
 
@@ -21,6 +20,7 @@ from watchdog.observers import Observer
 config = configparser.ConfigParser()
 config.read('ss.ini')
 _server = config['main']['Server']
+_version = "0.5"
 
 # TODO: Finish arguments
 """
@@ -71,6 +71,10 @@ def main():
     path = config['main']['WDir']
     filename = ''
 
+    print("OSX-SS Version: " + _version)
+    print("Using uploader: " + config['main']['Handler'])
+    print("Using server: " + _server)
+
     observer = Observer()
     event_handler = Monitor(observer, filename)
 
@@ -95,6 +99,7 @@ def handler(filename):
         debug(filename)
     else:
         return
+    return
 
 
 def ftp_upload(filename):
@@ -109,6 +114,7 @@ def ftp_upload(filename):
     notify(url)
     print(url)
     ftp.quit()
+    return
 
 
 '''
@@ -147,9 +153,11 @@ def pupload_upload(filename):
         if stream == '':
             pass
         else:
+            print(stream)
             notify(stream)
             c.kill()
             return
+    return
 
 
 def gen(size=5, chars=string.ascii_letters + string.digits):
@@ -168,6 +176,7 @@ def notify(url):
     elif platform.system() == 'Windows':
         print("whee")
     pyperclip.copy(url)
+    return
 
 
 def which(program):
