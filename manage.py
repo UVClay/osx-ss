@@ -17,7 +17,7 @@ import time
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-from handlers import ftp, imgur, pupload, teknik, handler as default
+from handlers import ftp, imgur, pupload, handler as default
 
 config = configparser.ConfigParser()
 config.read('ss.ini')
@@ -102,8 +102,6 @@ def handler(filename):
         handler = ftp.ftp(*data)
     elif user_handler == 'imgur':
         handler = imgur.imgur(*data)
-    elif user_handler == 'teknik':
-        handler = teknik.teknik(*data)
     elif user_handler == 'debug':
         handler = default.handler(*data)
     else:
