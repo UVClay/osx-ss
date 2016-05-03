@@ -130,7 +130,8 @@ def notify(url):
 
 def which(program):
     def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+        #return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+        return True
 
     fpath, fname = os.path.split(program)
     if fpath:

@@ -1,4 +1,4 @@
-from handler import handler
+from handlers.handler import handler
 
 from ftplib import FTP
 from os import path
@@ -9,6 +9,7 @@ class ftp(handler):
     
     def upload(self):
         config = self.config
+        print(config)
         ext = path.splitext(path.abspath(self.file))[-1]
         new = self.gen() + ext
         Ftp = FTP(config[self.server]['FTPHost'], config[self.server]['FTPUser'], config[self.server]['FTPPass'])

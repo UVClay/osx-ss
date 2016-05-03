@@ -1,13 +1,13 @@
 import subprocess
 from os import path
-import handler
+from handlers.handler import handler
 
 class pupload(handler):
     def upload(self):
         # TODO: Make this less horrible.  Its really gross.
         url = self.config[self.server]['PupFile']
         conckey = self.config[self.server]['PupKey1'] + "=" + self.config[self.server]['PupKey2']
-        concfile = "file[]=@" + path.abspath(self.filename)
+        concfile = "file[]=@" + path.abspath(self.file)
         c = subprocess.Popen(
             ["curl", "-s", "-F", conckey, "-F", concfile, url], stdout=subprocess.PIPE
         )
