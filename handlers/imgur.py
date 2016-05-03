@@ -3,6 +3,8 @@ import requests
 from base64 import b64encode
 from os import path
 
+from imgurpython import ImgurClient
+
 class imgur(handler):
     def __init__(self, file, server):
         handler.__init__(self, file, server)
@@ -10,23 +12,16 @@ class imgur(handler):
         self.apiKey = None
         self.clientId = None
         self.url = None
+        self.client = None
 
     def setConfig(self, val):
         self.config = val
         self.clientId = self.config[self.server]['ClientId']
         self.apiKey = self.config[self.server]['ApiKey']
         self.url = self.config[self.server]['Url']
+        self.client = ImgurClient(self.clientId, self.apiKey)
 
     def upload(self):
-        image = b64encode(open(self.file, 'rb').read())
-        name = path.split(self.file)[1]
-
-        imgur_req = requests.post(
-            self.url,
-            headers = {'Authorization' : 'Client-ID %s' % self.clientId},
-            data = {
-                'image': image
-            }
-        )
-        print(imgur_req.text)
-        return 'done'
+        resp = self.client.upload_from_path(self.file)
+        print('Uploaded to imgur. %s' % resp['link'])
+        return 'Uploaded %s to : %s' % (path.split(self.file)[1], resp['link'])
