@@ -1,0 +1,2 @@
+class imgur( object ):
+    pass
