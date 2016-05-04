@@ -17,7 +17,7 @@ OS X Screenshot Utility is a simple Python daemon leveraging watchdog to monitor
 * Installer
 * Finish arguments/interactive logic
 * Logic for additional file types
-* Built-in support for image hosts (imgur, pomf, etc.)
+* Built-in support for image hosts (pomf, etc.)
 * Built-in support for cloud file hosting (box, mega, aws, etc.)
 * Support for non-FTP file transfer (sftp, POST, rsync)
 
