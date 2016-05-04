@@ -1,9 +1,8 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 # OS X Screenshot Automation
 # github.com/uvclay/osx-ss
-# Revision 0.3.0
 # Requires (homebrew): terminal-notifier
-# Requires (linux): xclip
+# Requires (arch): xclip, python-pyqt5
 # Requires (pip3): pyperclip, watchdog
 # Optional (pip3): pycurl
 
@@ -18,9 +17,12 @@ import time
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
+from handlers import ftp, imgur, pupload, handler as default
+
 config = configparser.ConfigParser()
 config.read('ss.ini')
 _server = config['main']['Server']
+_version = "0.5"
 
 # TODO: Finish arguments
 """
@@ -44,7 +46,7 @@ class Monitor(FileSystemEventHandler):
     def on_created(self, event):
         if not event.is_directory and event.src_path.endswith(self.filename):
             handler(event.src_path)
-            self.observer.stop
+            self.observer.stop()
 
 
 def depcheck():
@@ -71,6 +73,10 @@ def main():
     path = config['main']['WDir']
     filename = ''
 
+    print("OSX-SS Version: " + _version)
+    print("Using uploader: " + config['main']['Handler'])
+    print("Using server: " + _server)
+
     observer = Observer()
     event_handler = Monitor(observer, filename)
 
@@ -87,77 +93,29 @@ def main():
 
 
 def handler(filename):
-    if config['main']['Handler'] == 'pupload':
-        pupload_upload(filename)
-    elif config['main']['Handler'] == 'ftp':
-        ftp_upload(filename)
-    elif config['main']['Handler'] == 'debug':
-        debug(filename)
+    print('Found file [%s]' % filename)
+    user_handler = config['main']['Handler']
+    data = [filename, _server]
+    if user_handler == 'pupload':
+        handler = pupload.pupload(*data)
+    elif user_handler == 'ftp':
+        handler = ftp.ftp(*data)
+    elif user_handler == 'imgur':
+        handler = imgur.imgur(*data)
+    elif user_handler == 'debug':
+        handler = default.handler(*data)
     else:
         return
+    handler.setConfig(config)
+    notify(handler.upload())
+    return
 
-
-def ftp_upload(filename):
-    from ftplib import FTP
-    ext = os.path.splitext(os.path.abspath(filename))[-1]
-    new = gen() + ext
-    ftp = FTP(config[_server]['FTPHost'], config[_server]['FTPUser'], config[_server]['FTPPass'])
-    img = open(filename, "rb")
-    ftp.storbinary('STOR ' + new, img)
-    url = config[_server]['WebRoot'] + new
-    img.close()
-    notify(url)
-    print(url)
-    ftp.quit()
-
-
-'''
-def pupload_upload(filename):
-    import pycurl
-    from urllib.parse import urlencode
-    file = config[_server]['PupFile']
-    key1 = config[_server]['PupKey1']
-    key2 = config[_server]['PupKey2']
-
-    c = pycurl.Curl()
-    c.setopt(c.URL, file)
-
-    c.setopt(c.POSTFIELDS, urlencode({key1: key2}))
-    c.setopt(c.HTTPPOST, [
-    ('file[]', (
-        c.FORM_FILE, __file__,
-    )),
-])
-
-    c.perform()
-    c.close()
-'''
-
-
-def pupload_upload(filename):
-    # TODO: Make this less horrible.  Its really gross.
-    url = config[_server]['PupFile']
-    conckey = config[_server]['PupKey1'] + "=" + config[_server]['PupKey2']
-    concfile = "file[]=@" + os.path.abspath(filename)
-    c = subprocess.Popen(
-        ["curl", "-s", "-F", conckey, "-F", concfile, url], stdout=subprocess.PIPE
-    )
-    for line in iter(c.stdout.readline, ''):
-        stream = line.decode()
-        if stream == '':
-            pass
-        else:
-            notify(stream)
-            c.kill()
-            return
-
-
-def gen(size=5, chars=string.ascii_letters + string.digits):
-    # http://stackoverflow.com/a/2257449
-    return ''.join(random.choice(chars) for _ in range(size))
 
 
 def notify(url):
+    if not url:
+        return
+
     if platform.system() == 'Darwin':
         subprocess.Popen(
             ["terminal-notifier", "-title", "Screenshot Uploaded!", "-message", "Image uploaded to: " + url + "",
@@ -168,6 +126,7 @@ def notify(url):
     elif platform.system() == 'Windows':
         print("whee")
     pyperclip.copy(url)
+    return
 
 
 def which(program):

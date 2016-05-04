@@ -26,3 +26,8 @@ PupKey1 = key1value
 PupKey2 = key2value
 PupFile = http://i.clay.coffee/puploader.php
 WebRoot = http://i.clay.coffee
+
+# Example Imgur API stuff. Go to imgur developer to get id and key
+[imgur]
+ClientId = a51795315558a52
+ApiKey   = a95690981c904de44fd4935442ceab1d92b0c0ef
